@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShortHand Property Names</title>
+  </head>
+  <body>
+    <main>
+      <h1>
+        La mejor. <br />
+        Para los mejores
+      </h1>
+      <div class="hero">
+        <div class="wrapper">
+          <div class="hero-content">
+            <div class="mac"></div>
+            <div class="app">
+              <p>
+                <strong> Precio: </strong>
+                <span id="price">-</span>
+              </p>
+              <p>
+                <strong> Precio oferta: </strong>
+                <span id="offer">-</span>
+              </p>
+              <p>
+                <strong> Precio Final: </strong>
+                <span id="final-price">-</span>
+              </p>
+              <button class="button" id="make-offer">Regatear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const price = 2700;
+      const macbook = {
+        price,
+        get finalPrice() {
+          return this.price * 1.16;
+        },
+        set offer(offer) {
+          this.price -= offer;
+        },
+        getPrice() {
+          console.log(this.price);
+        },
+        //Generador
+        *discount(offer) {
+          let price = this.finalPrice;
+          while (true) {
+            yield (price -= offer);
+          }
+        },
+      };
+
+      window.price.textContent = macbook.price;
+      macbook.offer = 500;
+      window.offer.textContent = macbook.price;
+      macbook.finalPrice;
+      window["final-price"].textContent = macbook.finalPrice;
+
+      const makeAnOfer = macbook.discount(15);
+      window["make-offer"].addEventListener("click", () => {
+        window["final-price"].textContent = makeAnOfer.next().value;
+      });
+    </script>
+  </body>
+</html>
