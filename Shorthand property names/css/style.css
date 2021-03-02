@@ -29,6 +29,8 @@ p {
   display: flex;
   justify-content: space-between;
 }
+
+/* agregar imagen y sus propiedades*/
 .mac {
   height: 700px;
   flex: 1;
@@ -44,5 +46,5 @@ p {
   padding: 0.7em 1em;
   border-radius: 0.5em;
   font-weight: bold;
-  cursor: pointer;
+  cursor: pointer; /*estilo de puntero al momento de pasar el mous*/
 }
