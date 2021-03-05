@@ -9,7 +9,10 @@
 
   <body>
     <main class="wrapper">
-      <h1>Icecream Machine</h1>
+      <h1>
+        Icecream Machine <br />
+        V2
+      </h1>
       <p>Elige los 2 sabores que más te gusten y haz tu orden</p>
       <div class="icrecream-grid">
         <div class="flavor" data-flavor="strawberry"></div>
@@ -32,20 +35,24 @@
       function isRequired(param) {
         throw new Error(`${param} es requerido`);
       }
-      function makeIcecream(
+      function makeIcecream([
         flavor1 = isRequired("flavor1"),
-        flavor2 = isRequired("flavor2")
-      ) {
+        flavor2 = isRequired(flavor2),
+        ...otherFlavors
+      ]) {
+        console.log(otherFlavors.map);
+        const toppings = otherFlavors.map((f) => f.dataset.flavor);
+        console.log(toppings);
         alert(
-          `tienes un rico helado de ${flavor1.dataset.flavor} y ${flavor2.dataset.flavor}`
+          `Tienes un rico helado de ${flavor1.dataset.flavor} y ${flavor2.dataset.flavor} con toppings de ${toppings}`
         );
       }
 
       window.btn.addEventListener("click", () => {
         const $flavors = document.querySelectorAll(".flavor.is-active");
-        console.log($flavors);
+        //console.log($flavors);
         try {
-          makeIcecream($flavors[0], $flavors[1]);
+          makeIcecream([...$flavors]);
         } catch (error) {
           alert("Aun no completas los sabores para preparar tu helado");
         }
