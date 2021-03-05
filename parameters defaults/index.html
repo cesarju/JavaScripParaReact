@@ -29,8 +29,10 @@
       function selectFlavor() {
         this.classList.toggle("is-active");
       }
-
-      function makeIcecream(flavor1, flavor2) {
+      function isRequired(param) {
+        throw new Error(`${param} es requerido`);
+      }
+      function makeIcecream(flavor1 = isRequired("flavor1"), flavor2) {
         alert(
           `tienes un rico helado de ${flavor1.dataset.flavor} y ${flavor2.dataset.flavor}`
         );
@@ -39,7 +41,11 @@
       window.btn.addEventListener("click", () => {
         const $flavors = document.querySelectorAll(".flavor.is-active");
         console.log($flavors);
-        makeIcecream($flavors[0], $flavors[1]);
+        try {
+          makeIcecream($flavors[0], $flavors[1]);
+        } catch (error) {
+          alert("Aun no completas los sabores para preparar tu helado");
+        }
       });
     </script>
   </body>
